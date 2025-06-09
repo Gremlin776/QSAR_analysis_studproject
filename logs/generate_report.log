@@ -1,0 +1,98 @@
+2025-06-09 12:26:48,166 - INFO - Начало генерации отчета
+2025-06-09 12:26:48,167 - INFO - Все зависимости найдены
+2025-06-09 12:26:48,178 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\regression_log_ic50.csv
+2025-06-09 12:26:48,185 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\regression_log_cc50.csv
+2025-06-09 12:26:48,193 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\regression_log_si.csv
+2025-06-09 12:26:48,200 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\classification_ic50_median.csv
+2025-06-09 12:26:48,208 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\classification_cc50_median.csv
+2025-06-09 12:26:48,216 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\classification_si_median.csv
+2025-06-09 12:26:48,224 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\results\classification_si_8.csv
+2025-06-09 12:26:48,232 - INFO - Файл загружен: D:\ML_coursework\qsar_an1\data\dataset_info.csv
+2025-06-09 12:26:48,233 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\dataset_before_processing.png
+2025-06-09 12:26:48,233 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\boxplot_targets.png
+2025-06-09 12:26:48,233 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\dataset_after_processing.png
+2025-06-09 12:26:48,233 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\log_ic50_distribution.png
+2025-06-09 12:26:48,233 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\log_cc50_distribution.png
+2025-06-09 12:26:48,234 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\log_si_distribution.png
+2025-06-09 12:26:48,235 - INFO - Таблица сгенерирована для regression_log_cc50
+2025-06-09 12:26:48,235 - INFO - Лучшая модель: Voting, метрики: {'R2': np.float64(0.501), 'MSE': np.float64(1.099), 'MAE': np.float64(0.749)}
+2025-06-09 12:26:48,236 - INFO - Рекомендации для log_cc50: ['Для log_cc50 R\xb2 приемлемый (0.501). Можно улучшить:', '- Провести дополнительную настройку гиперпараметров.', '- Добавить новые признаки через feature engineering.']
+2025-06-09 12:26:48,236 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_cc50_rf.png
+2025-06-09 12:26:48,236 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_cc50_gb.png
+2025-06-09 12:26:48,236 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_cc50_lgb.png
+2025-06-09 12:26:48,236 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_cc50_xgb.png
+2025-06-09 12:26:48,237 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\pred_vs_true_log_cc50_rf.png
+2025-06-09 12:26:48,237 - INFO - Таблица сгенерирована для regression_log_ic50
+2025-06-09 12:26:48,238 - INFO - Лучшая модель: RF, метрики: {'R2': np.float64(0.476), 'MSE': np.float64(1.667), 'MAE': np.float64(0.991)}
+2025-06-09 12:26:48,238 - INFO - Рекомендации для log_ic50: ['Для log_ic50 R\xb2 низкий (0.476). Рекомендуется:', '- Проверить данные на выбросы с помощью Isolation Forest.', '- Применить SMOTE для балансировки данных, если наблюдается дисбаланс.', '- Рассмотреть PCA для снижения размерности признаков.', '- Использовать более сложные модели, например, Stacking Regressor.']
+2025-06-09 12:26:48,238 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_ic50_rf.png
+2025-06-09 12:26:48,238 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_ic50_gb.png
+2025-06-09 12:26:48,238 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_ic50_lgb.png
+2025-06-09 12:26:48,239 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_ic50_xgb.png
+2025-06-09 12:26:48,239 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\pred_vs_true_log_ic50_lgb.png
+2025-06-09 12:26:48,240 - INFO - Таблица сгенерирована для regression_log_si
+2025-06-09 12:26:48,240 - INFO - Лучшая модель: RF, метрики: {'R2': np.float64(0.261), 'MSE': np.float64(0.883), 'MAE': np.float64(0.757)}
+2025-06-09 12:26:48,240 - INFO - Рекомендации для log_si: ['Для log_si R\xb2 низкий (0.261). Рекомендуется:', '- Проверить данные на выбросы с помощью Isolation Forest.', '- Применить SMOTE для балансировки данных, если наблюдается дисбаланс.', '- Рассмотреть PCA для снижения размерности признаков.', '- Использовать более сложные модели, например, Stacking Regressor.']
+2025-06-09 12:26:48,240 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_si_rf.png
+2025-06-09 12:26:48,240 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_si_gb.png
+2025-06-09 12:26:48,240 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_si_lgb.png
+2025-06-09 12:26:48,241 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_log_si_xgb.png
+2025-06-09 12:26:48,241 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\pred_vs_true_log_si_rf.png
+2025-06-09 12:26:48,242 - INFO - Таблица сгенерирована для classification_ic50_median
+2025-06-09 12:26:48,242 - INFO - Лучшая модель: LGB, метрики: {'F1': np.float64(0.754), 'Accuracy': np.float64(0.746), 'Precision': np.float64(0.736), 'Recall': np.float64(0.772), 'ROC_AUC': np.float64(0.776)}
+2025-06-09 12:26:48,242 - INFO - Рекомендации для IC50_median: ['Для IC50_median метрики приемлемые (F1=0.754, Precision=0.736, Recall=0.772). Можно улучшить:', '- Провести дополнительную настройку гиперпараметров.', '- Проверить важность признаков для исключения лишних.']
+2025-06-09 12:26:48,242 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_ic50_median_lgb.png
+2025-06-09 12:26:48,242 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_ic50_median_lgb.png
+2025-06-09 12:26:48,243 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_ic50_median_lgb.png
+2025-06-09 12:26:48,243 - INFO - Таблица сгенерирована для classification_cc50_median
+2025-06-09 12:26:48,244 - INFO - Лучшая модель: Voting, метрики: {'F1': np.float64(0.785), 'Accuracy': np.float64(0.776), 'Precision': np.float64(0.759), 'Recall': np.float64(0.812), 'ROC_AUC': np.float64(0.875)}
+2025-06-09 12:26:48,244 - INFO - Рекомендации для CC50_median: ['Для CC50_median метрики приемлемые (F1=0.785, Precision=0.759, Recall=0.812). Можно улучшить:', '- Провести дополнительную настройку гиперпараметров.', '- Проверить важность признаков для исключения лишних.']
+2025-06-09 12:26:48,244 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_cc50_median_rf.png
+2025-06-09 12:26:48,244 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\roc_curve_cc50_median_rf.png
+2025-06-09 12:26:48,244 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_cc50_median_rf.png
+2025-06-09 12:26:48,244 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_cc50_median_lgb.png
+2025-06-09 12:26:48,244 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\roc_curve_cc50_median_lgb.png
+2025-06-09 12:26:48,245 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_cc50_median_lgb.png
+2025-06-09 12:26:48,245 - INFO - Таблица сгенерирована для classification_si_median
+2025-06-09 12:26:48,246 - INFO - Лучшая модель: Voting, метрики: {'F1': np.float64(0.642), 'Accuracy': np.float64(0.657), 'Precision': np.float64(0.667), 'Recall': np.float64(0.62), 'ROC_AUC': np.float64(0.693)}
+2025-06-09 12:26:48,246 - INFO - Рекомендации для SI_median: ['Для SI_median низкие метрики (F1=0.642, Precision=0.667, Recall=0.620). Рекомендуется:', '- Использовать SMOTE для балансировки классов.', '- Применить Grid Search для более точной настройки гиперпараметров.', '- Рассмотреть Stacking для улучшения классификации.']
+2025-06-09 12:26:48,246 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_rf.png
+2025-06-09 12:26:48,246 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_rf.png
+2025-06-09 12:26:48,246 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_si_median_rf.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_xgb.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_xgb.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_si_median_xgb.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_lgb.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_lgb.png
+2025-06-09 12:26:48,247 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_si_median_lgb.png
+2025-06-09 12:26:48,248 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_gb.png
+2025-06-09 12:26:48,248 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_gb.png
+2025-06-09 12:26:48,248 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\feature_importance_si_median_gb.png
+2025-06-09 12:26:48,248 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_lr.png
+2025-06-09 12:26:48,249 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_lr.png
+2025-06-09 12:26:48,249 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_median_voting.png
+2025-06-09 12:26:48,249 - INFO - Визуализация найдена: D:\ML_coursework\qsar_an1\figures\roc_curve_si_median_voting.png
+2025-06-09 12:26:48,250 - INFO - Таблица сгенерирована для classification_si_8
+2025-06-09 12:26:48,250 - INFO - Лучшая модель: RF, метрики: {'F1': np.float64(0.847), 'Accuracy': np.float64(0.756), 'Precision': np.float64(0.764), 'Recall': np.float64(0.951)}
+2025-06-09 12:26:48,250 - INFO - Рекомендации для SI > 8: ['Для SI > 8 метрики приемлемые (F1=0.847, Precision=0.764, Recall=0.951). Можно улучшить:', '- Провести дополнительную настройку гиперпараметров.', '- Проверить важность признаков для исключения лишних.']
+2025-06-09 12:26:48,251 - INFO - Лучшая модель: RF, метрики: {'F1': np.float64(0.847), 'Accuracy': np.float64(0.756)}
+2025-06-09 12:26:48,251 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_rf.png
+2025-06-09 12:26:48,251 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\feature_importance_si_8_rf.png
+2025-06-09 12:26:48,251 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_xgb.png
+2025-06-09 12:26:48,251 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\feature_importance_si_8_xgb.png
+2025-06-09 12:26:48,251 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_lgb.png
+2025-06-09 12:26:48,252 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\feature_importance_si_8_lgb.png
+2025-06-09 12:26:48,252 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_gb.png
+2025-06-09 12:26:48,252 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\feature_importance_si_8_gb.png
+2025-06-09 12:26:48,252 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_lr.png
+2025-06-09 12:26:48,252 - WARNING - Визуализация отсутствует: D:\ML_coursework\qsar_an1\figures\confusion_matrix_si_8_voting.png
+2025-06-09 12:26:48,253 - INFO - Лучшая модель: Voting, метрики: {'R2': np.float64(0.501)}
+2025-06-09 12:26:48,253 - INFO - Лучшая модель: RF, метрики: {'R2': np.float64(0.476)}
+2025-06-09 12:26:48,253 - INFO - Лучшая модель: RF, метрики: {'R2': np.float64(0.261)}
+2025-06-09 12:26:48,253 - INFO - Лучшая модель: RF, метрики: {'R2': np.float64(0.261)}
+2025-06-09 12:26:48,253 - INFO - Лучшая модель: LGB, метрики: {'F1': np.float64(0.754)}
+2025-06-09 12:26:48,254 - INFO - Лучшая модель: Voting, метрики: {'F1': np.float64(0.785)}
+2025-06-09 12:26:48,254 - INFO - Лучшая модель: Voting, метрики: {'F1': np.float64(0.642)}
+2025-06-09 12:26:48,254 - INFO - Лучшая модель: RF, метрики: {'F1': np.float64(0.847)}
+2025-06-09 12:26:48,254 - INFO - Лучшая модель: RF, метрики: {'F1': np.float64(0.847)}
+2025-06-09 12:26:48,255 - INFO - Отчет успешно сохранен: D:\ML_coursework\qsar_an1\results\report.md

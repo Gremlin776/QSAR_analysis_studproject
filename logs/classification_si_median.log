@@ -1,0 +1,45 @@
+2025-06-09 12:03:41,516 - INFO - Запуск classification_si_median.py
+2025-06-09 12:03:41,536 - INFO - Медиана SI: 3.846153846153846, классы: Counter({0: 501, 1: 500})
+2025-06-09 12:03:41,540 - INFO - Разделение данных: train=800, test=201
+2025-06-09 12:03:41,547 - INFO - Признаки стандартизированы
+2025-06-09 12:05:09,694 - INFO - Лучшие параметры для RF: {'n_estimators': 198, 'max_depth': 30, 'min_samples_split': 5, 'min_samples_leaf': 2}
+2025-06-09 12:05:10,409 - INFO - Обучающий F1 для RF: 0.960
+2025-06-09 12:05:10,410 - INFO - Тестовые метрики RF: Accuracy=0.642, F1=0.609, Precision=0.667, Recall=0.560, ROC_AUC=0.685, PR_AUC=0.693
+2025-06-09 12:05:10,588 - INFO - Важность признаков сохранена: figures/feature_importance_si_median_rf.png
+2025-06-09 12:05:10,707 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_rf.png
+2025-06-09 12:05:10,808 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_rf.png
+2025-06-09 12:06:24,829 - INFO - Лучшие параметры для XGB: {'n_estimators': 92, 'max_depth': 6, 'learning_rate': 0.18694235232987064, 'reg_lambda': 1.752161138674377, 'reg_alpha': 0.29040826574631634}
+2025-06-09 12:06:25,076 - INFO - Обучающий F1 для XGB: 0.984
+2025-06-09 12:06:25,076 - INFO - Тестовые метрики XGB: Accuracy=0.657, F1=0.635, Precision=0.674, Recall=0.600, ROC_AUC=0.691, PR_AUC=0.702
+2025-06-09 12:06:25,213 - INFO - Важность признаков сохранена: figures/feature_importance_si_median_xgb.png
+2025-06-09 12:06:25,338 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_xgb.png
+2025-06-09 12:06:25,443 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_xgb.png
+2025-06-09 12:06:50,641 - INFO - Лучшие параметры для LGB: {'n_estimators': 128, 'max_depth': 19, 'learning_rate': 0.18928156010401195, 'num_leaves': 28, 'min_child_samples': 32}
+2025-06-09 12:06:50,800 - INFO - Обучающий F1 для LGB: 0.984
+2025-06-09 12:06:50,800 - INFO - Тестовые метрики LGB: Accuracy=0.637, F1=0.622, Precision=0.645, Recall=0.600, ROC_AUC=0.683, PR_AUC=0.693
+2025-06-09 12:06:50,932 - INFO - Важность признаков сохранена: figures/feature_importance_si_median_lgb.png
+2025-06-09 12:06:51,056 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_lgb.png
+2025-06-09 12:06:51,165 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_lgb.png
+2025-06-09 12:21:17,784 - INFO - Лучшие параметры для GB: {'n_estimators': 133, 'max_depth': 9, 'learning_rate': 0.15890862241967899, 'min_samples_split': 2}
+2025-06-09 12:21:22,148 - INFO - Обучающий F1 для GB: 1.000
+2025-06-09 12:21:22,148 - INFO - Тестовые метрики GB: Accuracy=0.662, F1=0.634, Precision=0.686, Recall=0.590, ROC_AUC=0.678, PR_AUC=0.686
+2025-06-09 12:21:22,269 - INFO - Важность признаков сохранена: figures/feature_importance_si_median_gb.png
+2025-06-09 12:21:22,366 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_gb.png
+2025-06-09 12:21:22,460 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_gb.png
+2025-06-09 12:21:31,040 - INFO - Лучшие параметры для LR: {'C': 9.33094438649568}
+2025-06-09 12:21:31,106 - INFO - Обучающий F1 для LR: 0.741
+2025-06-09 12:21:31,106 - INFO - Тестовые метрики LR: Accuracy=0.612, F1=0.625, Precision=0.602, Recall=0.650, ROC_AUC=0.649, PR_AUC=0.667
+2025-06-09 12:21:31,205 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_lr.png
+2025-06-09 12:21:31,297 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_lr.png
+2025-06-09 12:21:31,297 - INFO - Обучение ансамбля
+2025-06-09 12:21:33,100 - INFO - Матрица ошибок сохранена: figures/confusion_matrix_si_median_voting.png
+2025-06-09 12:21:33,192 - INFO - ROC кривая сохранена: figures/roc_curve_si_median_voting.png
+2025-06-09 12:21:33,192 - INFO - Метрики ансамбля: Accuracy=0.657, F1=0.642
+2025-06-09 12:21:33,197 - INFO - Результаты классификации SI_median:
+    Model  Accuracy     F1  Precision  Recall  ROC_AUC  PR_AUC
+0      RF     0.642  0.609      0.667    0.56    0.685   0.693
+1     XGB     0.657  0.635      0.674    0.60    0.691   0.702
+2     LGB     0.637  0.622      0.645    0.60    0.683   0.693
+3      GB     0.662  0.634      0.686    0.59    0.678   0.686
+4      LR     0.612  0.625      0.602    0.65    0.649   0.667
+5  Voting     0.657  0.642      0.667    0.62    0.693   0.694

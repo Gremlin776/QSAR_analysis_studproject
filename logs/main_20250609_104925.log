@@ -1,0 +1,43 @@
+2025-06-09 10:49:25,982 - INFO - [main.py] - Запуск QSAR пайплайна
+2025-06-09 10:49:25,982 - INFO - [main.py] - Запуск eda.py
+2025-06-09 10:49:44,307 - INFO - [main.py] - eda.py успешно завершён
+2025-06-09 10:49:44,323 - INFO - [main.py] - Запуск regression_log_ic50.py
+2025-06-09 11:12:49,246 - INFO - [main.py] - regression_log_ic50.py успешно завершён
+2025-06-09 11:12:49,247 - WARNING - [main.py] - Предупреждения в regression_log_ic50.py: [I 2025-06-09 10:49:47,698] A new study created in memory with name: no-name-97f987a5-3d25-4630-ac0a-1edfc9d7a982
+[I 2025-06-09 10:49:54,731] Trial 0 finished with value: 1.8051607436930919 and parameters: {'n_estimators': 83, 'max_depth': 20, 'min_samples_split': 2, 'min_samples_leaf': 2}. Best is trial 0 with value: 1.8051607436930919.
+[I 2025-06-09 10:50:02,247] Trial 1 finished with value: 1.7970795852585535 and parameters: {'n_estimators': 82, 'max_depth': None, 'min_samples_split': 4, 'min
+2025-06-09 11:12:49,249 - INFO - [main.py] - Запуск regression_log_cc50.py
+2025-06-09 11:19:25,851 - INFO - [main.py] - regression_log_cc50.py успешно завершён
+2025-06-09 11:19:25,851 - WARNING - [main.py] - Предупреждения в regression_log_cc50.py: [I 2025-06-09 11:12:52,431] A new study created in memory with name: no-name-4d27b47a-61bf-4a71-a8e1-6365df28dd64
+[I 2025-06-09 11:13:03,160] Trial 4 finished with value: 1.3860994142340683 and parameters: {'n_estimators': 55, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 4}. Best is trial 4 with value: 1.3860994142340683.
+[I 2025-06-09 11:13:05,387] Trial 3 finished with value: 1.3259262617647747 and parameters: {'n_estimators': 99, 'max_depth': 20, 'min_samples_split': 2, 'min_
+2025-06-09 11:19:25,851 - INFO - [main.py] - Запуск regression_log_si.py
+2025-06-09 11:38:38,209 - INFO - [main.py] - regression_log_si.py успешно завершён
+2025-06-09 11:38:38,209 - WARNING - [main.py] - Предупреждения в regression_log_si.py: [I 2025-06-09 11:19:29,140] A new study created in memory with name: no-name-9723e594-bdbe-4ad4-a1c4-b796390c7af4
+[I 2025-06-09 11:19:37,406] Trial 0 finished with value: 0.9186683391085241 and parameters: {'n_estimators': 78, 'max_depth': None, 'min_samples_split': 4, 'min_samples_leaf': 1}. Best is trial 0 with value: 0.9186683391085241.
+[I 2025-06-09 11:19:47,533] Trial 1 finished with value: 0.8897176929982734 and parameters: {'n_estimators': 134, 'max_depth': 30, 'min_samples_split': 7, 'mi
+2025-06-09 11:38:38,211 - INFO - [main.py] - Запуск classification_ic50_median.py
+2025-06-09 11:55:19,878 - INFO - [main.py] - classification_ic50_median.py успешно завершён
+2025-06-09 11:55:19,878 - WARNING - [main.py] - Предупреждения в classification_ic50_median.py: [I 2025-06-09 11:38:42,336] A new study created in memory with name: no-name-2b1f85bf-b7f9-41b2-ac54-117bc0d5a2aa
+[I 2025-06-09 11:38:44,127] Trial 0 finished with value: 0.7307418488684312 and parameters: {'n_estimators': 120, 'max_depth': None, 'min_samples_split': 4, 'min_samples_leaf': 1}. Best is trial 0 with value: 0.7307418488684312.
+[I 2025-06-09 11:38:46,307] Trial 1 finished with value: 0.7207654056075835 and parameters: {'n_estimators': 148, 'max_depth': 30, 'min_samples_split': 2, 'm
+2025-06-09 11:55:19,879 - INFO - [main.py] - Запуск classification_cc50_median.py
+2025-06-09 12:03:38,117 - INFO - [main.py] - classification_cc50_median.py успешно завершён
+2025-06-09 12:03:38,117 - WARNING - [main.py] - Предупреждения в classification_cc50_median.py: [I 2025-06-09 11:55:23,403] A new study created in memory with name: no-name-1b7c08d1-39a0-407a-997f-48423646a6cf
+[I 2025-06-09 11:55:26,428] Trial 0 finished with value: 0.7162187912072724 and parameters: {'n_estimators': 191, 'max_depth': 30, 'min_samples_split': 2, 'min_samples_leaf': 1}. Best is trial 0 with value: 0.7162187912072724.
+[I 2025-06-09 11:55:28,827] Trial 1 finished with value: 0.7397750048538582 and parameters: {'n_estimators': 179, 'max_depth': None, 'min_samples_split': 2, 'm
+2025-06-09 12:03:38,118 - INFO - [main.py] - Запуск classification_si_median.py
+2025-06-09 12:21:33,538 - INFO - [main.py] - classification_si_median.py успешно завершён
+2025-06-09 12:21:33,538 - WARNING - [main.py] - Предупреждения в classification_si_median.py: [I 2025-06-09 12:03:41,547] A new study created in memory with name: no-name-a8f4f5f2-c392-430a-973d-21b7fd550e68
+[I 2025-06-09 12:03:44,228] Trial 0 finished with value: 0.6620437002814332 and parameters: {'n_estimators': 165, 'max_depth': 30, 'min_samples_split': 6, 'min_samples_leaf': 1}. Best is trial 0 with value: 0.6620437002814332.
+[I 2025-06-09 12:03:47,184] Trial 1 finished with value: 0.6600480066191896 and parameters: {'n_estimators': 196, 'max_depth': 30, 'min_samples_split': 2, 'min
+2025-06-09 12:21:33,538 - INFO - [main.py] - Запуск classification_si_8.py
+2025-06-09 12:26:47,478 - INFO - [main.py] - classification_si_8.py успешно завершён
+2025-06-09 12:26:47,478 - WARNING - [main.py] - Предупреждения в classification_si_8.py: [I 2025-06-09 12:21:36,422] A new study created in memory with name: no-name-9ebc554f-7df7-43c1-b6b9-1d72d940968c
+[I 2025-06-09 12:21:38,820] Trial 0 finished with value: 0.8012499999999999 and parameters: {'n_estimators': 183, 'max_depth': 10, 'min_samples_split': 6, 'min_samples_leaf': 3}. Best is trial 0 with value: 0.8012499999999999.
+[I 2025-06-09 12:21:39,807] Trial 1 finished with value: 0.78 and parameters: {'n_estimators': 67, 'max_depth': 30, 'min_samples_split': 2, 'min_samples_leaf':
+2025-06-09 12:26:47,478 - INFO - [main.py] - Запуск generate_report.py
+2025-06-09 12:26:48,318 - INFO - [main.py] - generate_report.py успешно завершён
+2025-06-09 12:26:48,318 - INFO - [main.py] - Запуск convert_to_pdf.py
+2025-06-09 12:26:52,580 - INFO - [main.py] - convert_to_pdf.py успешно завершён
+2025-06-09 12:26:52,581 - INFO - [main.py] - QSAR пайплайн успешно завершён

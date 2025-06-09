@@ -1,0 +1,645 @@
+<h2>Введение</h2>
+
+<p>Создание нового лекарственного препарата — сложный процесс, включающий определение химической формулы, синтез соединений, биологические испытания и клинические тесты. Машинное обучение ускоряет этот процесс, позволяя прогнозировать эффективность химических соединений. В проекте проанализированы данные о 1000 соединениях для предсказания их активности против вируса гриппа. Параметры: IC50 (концентрация, ингибирующая 50% вируса), CC50 (токсичность для 50% клеток), SI (селективный индекс, ( SI = \frac{CC50}{IC50} )). Соединения с SI &gt; 8 — потенциально эффективные.</p>
+
+<p>Цель — построить модели регрессии для логарифмов IC50, CC50, SI и классификации для определения превышения медианы и SI &gt; 8. Отчет описывает датасет, обработку, моделирование, результаты и QSAR-анализ.</p>
+
+<h2>Описание датасета</h2>
+
+<p>Датасет содержит 1000 соединений с числовыми признаками, IC50<em>mM, CC50</em>mM, SI. Загружен из <code>data/coursework_data.xlsx</code>.</p>
+
+<h3>Характеристики до обработки</h3>
+
+<ul>
+<li><strong>Размер</strong>: 1001 строк, 214 столбцов.</li>
+<li><strong>Пропуски</strong>: 36.</li>
+<li><strong>Типы данных</strong>: 107 float64, 107 int64.</li>
+<li><strong>Выбросы</strong>: В IC50<em>mM, CC50</em>mM, SI.</li>
+</ul>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/dataset_before_processing.png" alt="dataset_before_processing.png" /></p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/boxplot_targets.png" alt="boxplot_targets.png" /></p>
+
+<h2>Обработка датасета</h2>
+
+<p>Обработка в <code>eda.py</code>:<br />
+1. Удалены дубликаты.<br />
+2. Переименованы столбцы: <code>IC50_mM</code>, <code>CC50_mM</code>, признаки — <code>feature_i</code>.<br />
+3. Выбросы обрезаны по IQR.<br />
+4. Пропуски заполнены медианой.<br />
+5. Значения ≤ 0 заменены на ( 10^{-6} ).<br />
+6. Логарифмированы: <code>log_ic50</code>, <code>log_cc50</code>, <code>log_si</code>.<br />
+7. Удалены коррелированные признаки (&gt;0.8).<br />
+8. Удалены признаки с низкой дисперсией (&lt;0.01).<br />
+9. Исключены NaN/бесконечные значения.</p>
+
+<p>Итог: <code>data/processed_data.csv</code>.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/dataset_after_processing.png" alt="dataset_after_processing.png" /></p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/log_ic50_distribution.png" alt="log_ic50_distribution.png" /></p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/log_cc50_distribution.png" alt="log_cc50_distribution.png" /></p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/log_si_distribution.png" alt="log_si_distribution.png" /></p>
+
+<h2>Методология</h2>
+
+<h3>Модели и метрики</h3>
+
+<p>Модели: Random Forest, XGBoost, LightGBM, Gradient Boosting, Linear/Logistic Regression, Voting.<br />
+- <strong>Регрессия</strong>: MSE, R², MAE.<br />
+- <strong>Классификация</strong>: Accuracy, F1, Precision, Recall, ROC<em>AUC, PR</em>AUC.</p>
+
+<h3>Подготовка данных</h3>
+
+<p>80/20 разделение, StandardScaler, SMOTE при дисбалансе &gt;10%, Optuna (50 испытаний).</p>
+
+<h3>Визуализации</h3>
+
+<p>Матрицы ошибок, ROC-кривые, важность признаков, предсказания.</p>
+
+<h2>Результаты</h2>
+
+<h3>Регрессия</h3>
+
+<h4>log_cc50 (<code>regression_log_cc50.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>MSE</th>
+  <th>R2</th>
+  <th>MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>1.154</td>
+  <td>0.476</td>
+  <td>0.762</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>1.201</td>
+  <td>0.455</td>
+  <td>0.764</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>1.24</td>
+  <td>0.437</td>
+  <td>0.79</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>1.142</td>
+  <td>0.482</td>
+  <td>0.783</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>1.493</td>
+  <td>0.322</td>
+  <td>0.944</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>1.099</td>
+  <td>0.501</td>
+  <td>0.749</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: Voting (R²=0.501, MSE=1.099, MAE=0.749).</p>
+
+<h5>Рекомендации для log_cc50</h5>
+
+<p>Для log_cc50 R² приемлемый (0.501). Можно улучшить:<br />
+- Провести дополнительную настройку гиперпараметров.<br />
+- Добавить новые признаки через feature engineering.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_cc50_rf.png" alt="Feature Importance rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_cc50_gb.png" alt="Feature Importance gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_cc50_lgb.png" alt="Feature Importance lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_cc50_xgb.png" alt="Feature Importance xgb" /></p>
+
+<h4>log_ic50 (<code>regression_log_ic50.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>MSE</th>
+  <th>R2</th>
+  <th>MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>1.667</td>
+  <td>0.476</td>
+  <td>0.991</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>1.747</td>
+  <td>0.451</td>
+  <td>1.045</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>1.689</td>
+  <td>0.469</td>
+  <td>1.022</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>1.911</td>
+  <td>0.399</td>
+  <td>1.095</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>2.391</td>
+  <td>0.248</td>
+  <td>1.256</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>1.802</td>
+  <td>0.433</td>
+  <td>1.042</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: RF (R²=0.476, MSE=1.667, MAE=0.991).</p>
+
+<h5>Рекомендации для log_ic50</h5>
+
+<p>Для log_ic50 R² низкий (0.476). Рекомендуется:<br />
+- Проверить данные на выбросы с помощью Isolation Forest.<br />
+- Применить SMOTE для балансировки данных, если наблюдается дисбаланс.<br />
+- Рассмотреть PCA для снижения размерности признаков.<br />
+- Использовать более сложные модели, например, Stacking Regressor.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_ic50_rf.png" alt="Feature Importance rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_ic50_gb.png" alt="Feature Importance gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_ic50_lgb.png" alt="Feature Importance lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_ic50_xgb.png" alt="Feature Importance xgb" /></p>
+
+<h4>log_si (<code>regression_log_si.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>MSE</th>
+  <th>R2</th>
+  <th>MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>0.883</td>
+  <td>0.261</td>
+  <td>0.757</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>0.962</td>
+  <td>0.195</td>
+  <td>0.789</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>0.911</td>
+  <td>0.238</td>
+  <td>0.762</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>0.932</td>
+  <td>0.22</td>
+  <td>0.79</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>1.13</td>
+  <td>0.055</td>
+  <td>0.869</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>0.926</td>
+  <td>0.226</td>
+  <td>0.749</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: RF (R²=0.261, MSE=0.883, MAE=0.757).</p>
+
+<h5>Рекомендации для log_si</h5>
+
+<p>Для log_si R² низкий (0.261). Рекомендуется:<br />
+- Проверить данные на выбросы с помощью Isolation Forest.<br />
+- Применить SMOTE для балансировки данных, если наблюдается дисбаланс.<br />
+- Рассмотреть PCA для снижения размерности признаков.<br />
+- Использовать более сложные модели, например, Stacking Regressor.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_si_rf.png" alt="Feature Importance rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_si_gb.png" alt="Feature Importance gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_si_lgb.png" alt="Feature Importance lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_log_si_xgb.png" alt="Feature Importance xgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/pred_vs_true_log_si_rf.png" alt="Pred vs True" /></p>
+
+<h3>Классификация</h3>
+
+<h4>IC50_median (<code>classification_ic50_median.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>Accuracy</th>
+  <th>F1</th>
+  <th>Precision</th>
+  <th>Recall</th>
+  <th>ROC_AUC</th>
+  <th>PR_AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>0.731</td>
+  <td>0.74</td>
+  <td>0.72</td>
+  <td>0.762</td>
+  <td>0.777</td>
+  <td>0.732</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>0.706</td>
+  <td>0.715</td>
+  <td>0.698</td>
+  <td>0.733</td>
+  <td>0.76</td>
+  <td>0.716</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>0.746</td>
+  <td>0.754</td>
+  <td>0.736</td>
+  <td>0.772</td>
+  <td>0.776</td>
+  <td>0.713</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>0.726</td>
+  <td>0.732</td>
+  <td>0.721</td>
+  <td>0.743</td>
+  <td>0.762</td>
+  <td>0.737</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>0.667</td>
+  <td>0.676</td>
+  <td>0.66</td>
+  <td>0.693</td>
+  <td>0.736</td>
+  <td>0.727</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>0.726</td>
+  <td>0.739</td>
+  <td>0.709</td>
+  <td>0.772</td>
+  <td>0.783</td>
+  <td>0.741</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: LGB (F1=0.754, Accuracy=0.746, Precision=0.736, Recall=0.772, ROC_AUC=0.776).</p>
+
+<h5>Рекомендации для IC50_median</h5>
+
+<p>Для IC50_median метрики приемлемые (F1=0.754, Precision=0.736, Recall=0.772). Можно улучшить:<br />
+- Провести дополнительную настройку гиперпараметров.<br />
+- Проверить важность признаков для исключения лишних.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_ic50_median_lgb.png" alt="Confusion Matrix lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_ic50_median_lgb.png" alt="ROC Curve lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_ic50_median_lgb.png" alt="Feature Importance lgb" /></p>
+
+<h4>CC50_median (<code>classification_cc50_median.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>Accuracy</th>
+  <th>F1</th>
+  <th>Precision</th>
+  <th>Recall</th>
+  <th>ROC_AUC</th>
+  <th>PR_AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>0.761</td>
+  <td>0.767</td>
+  <td>0.752</td>
+  <td>0.782</td>
+  <td>0.852</td>
+  <td>0.858</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>0.741</td>
+  <td>0.764</td>
+  <td>0.706</td>
+  <td>0.832</td>
+  <td>0.826</td>
+  <td>0.812</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>0.741</td>
+  <td>0.75</td>
+  <td>0.729</td>
+  <td>0.772</td>
+  <td>0.836</td>
+  <td>0.836</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>0.766</td>
+  <td>0.771</td>
+  <td>0.76</td>
+  <td>0.782</td>
+  <td>0.872</td>
+  <td>0.871</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>0.746</td>
+  <td>0.763</td>
+  <td>0.719</td>
+  <td>0.812</td>
+  <td>0.838</td>
+  <td>0.838</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>0.776</td>
+  <td>0.785</td>
+  <td>0.759</td>
+  <td>0.812</td>
+  <td>0.875</td>
+  <td>0.869</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: Voting (F1=0.785, Accuracy=0.776, Precision=0.759, Recall=0.812, ROC_AUC=0.875).</p>
+
+<h5>Рекомендации для CC50_median</h5>
+
+<p>Для CC50_median метрики приемлемые (F1=0.785, Precision=0.759, Recall=0.812). Можно улучшить:<br />
+- Провести дополнительную настройку гиперпараметров.<br />
+- Проверить важность признаков для исключения лишних.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_cc50_median_rf.png" alt="Feature Importance rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_cc50_median_lgb.png" alt="Feature Importance lgb" /></p>
+
+<h4>SI_median (<code>classification_si_median.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>Accuracy</th>
+  <th>F1</th>
+  <th>Precision</th>
+  <th>Recall</th>
+  <th>ROC_AUC</th>
+  <th>PR_AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>0.642</td>
+  <td>0.609</td>
+  <td>0.667</td>
+  <td>0.56</td>
+  <td>0.685</td>
+  <td>0.693</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>0.657</td>
+  <td>0.635</td>
+  <td>0.674</td>
+  <td>0.6</td>
+  <td>0.691</td>
+  <td>0.702</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>0.637</td>
+  <td>0.622</td>
+  <td>0.645</td>
+  <td>0.6</td>
+  <td>0.683</td>
+  <td>0.693</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>0.662</td>
+  <td>0.634</td>
+  <td>0.686</td>
+  <td>0.59</td>
+  <td>0.678</td>
+  <td>0.686</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>0.612</td>
+  <td>0.625</td>
+  <td>0.602</td>
+  <td>0.65</td>
+  <td>0.649</td>
+  <td>0.667</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>0.657</td>
+  <td>0.642</td>
+  <td>0.667</td>
+  <td>0.62</td>
+  <td>0.693</td>
+  <td>0.694</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: Voting (F1=0.642, Accuracy=0.657, Precision=0.667, Recall=0.62, ROC_AUC=0.693).</p>
+
+<h5>Рекомендации для SI_median</h5>
+
+<p>Для SI_median низкие метрики (F1=0.642, Precision=0.667, Recall=0.620). Рекомендуется:<br />
+- Использовать SMOTE для балансировки классов.<br />
+- Применить Grid Search для более точной настройки гиперпараметров.<br />
+- Рассмотреть Stacking для улучшения классификации.</p>
+
+<p><img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_rf.png" alt="Confusion Matrix rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_rf.png" alt="ROC Curve rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_si_median_rf.png" alt="Feature Importance rf" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_xgb.png" alt="Confusion Matrix xgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_xgb.png" alt="ROC Curve xgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_si_median_xgb.png" alt="Feature Importance xgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_lgb.png" alt="Confusion Matrix lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_lgb.png" alt="ROC Curve lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_si_median_lgb.png" alt="Feature Importance lgb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_gb.png" alt="Confusion Matrix gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_gb.png" alt="ROC Curve gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/feature_importance_si_median_gb.png" alt="Feature Importance gb" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_lr.png" alt="Confusion Matrix lr" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_lr.png" alt="ROC Curve lr" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/confusion_matrix_si_median_voting.png" alt="Confusion Matrix voting" /><br />
+<img src="file:///D:/ML_coursework/qsar_an1/figures/roc_curve_si_median_voting.png" alt="ROC Curve voting" /></p>
+
+<h4>SI &gt; 8 (<code>classification_si_8.csv</code>)</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th>Accuracy</th>
+  <th>F1</th>
+  <th>Precision</th>
+  <th>Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF</td>
+  <td>0.756</td>
+  <td>0.847</td>
+  <td>0.764</td>
+  <td>0.951</td>
+</tr>
+<tr>
+  <td>XGB</td>
+  <td>0.736</td>
+  <td>0.835</td>
+  <td>0.753</td>
+  <td>0.937</td>
+</tr>
+<tr>
+  <td>LGB</td>
+  <td>0.736</td>
+  <td>0.834</td>
+  <td>0.756</td>
+  <td>0.93</td>
+</tr>
+<tr>
+  <td>GB</td>
+  <td>0.731</td>
+  <td>0.832</td>
+  <td>0.749</td>
+  <td>0.937</td>
+</tr>
+<tr>
+  <td>LR</td>
+  <td>0.736</td>
+  <td>0.839</td>
+  <td>0.742</td>
+  <td>0.965</td>
+</tr>
+<tr>
+  <td>Voting</td>
+  <td>0.701</td>
+  <td>0.804</td>
+  <td>0.755</td>
+  <td>0.86</td>
+</tr>
+</tbody>
+</table>
+
+<p>Лучшая модель: RF (F1=0.847, Accuracy=0.756, Precision=0.764, Recall=0.951).</p>
+
+<h5>Рекомендации для SI &gt; 8</h5>
+
+<p>Для SI &gt; 8 метрики приемлемые (F1=0.847, Precision=0.764, Recall=0.951). Можно улучшить:<br />
+- Провести дополнительную настройку гиперпараметров.<br />
+- Проверить важность признаков для исключения лишних.</p>
+
+<p>F1 (0.847) для log_si высокий, но возможна дальнейшая оптимизация с использованием SHAP-анализа.</p>
+
+<h2>Анализ и QSAR-рекомендации</h2>
+
+<h3>Общий анализ</h3>
+
+<ul>
+<li><strong>Регрессия</strong>:
+<ul>
+<li><code>Voting</code> лучшая для <code>log_cc50</code> (R²=0.501).</li>
+<li><code>RF</code> лучшая для <code>log_ic50</code> (R²=0.476).</li>
+<li><code>RF</code> лучшая для <code>log_si</code> (R²=0.261).</li>
+<li>Низкий R² для <code>log_si</code> (0.261) указывает на сложность предсказания SI.</li>
+</ul></li>
+<li><strong>Классификация</strong>:
+<ul>
+<li><code>LGB</code> лучшая для <code>IC50_median</code> (F1=0.754).</li>
+<li><code>Voting</code> лучшая для <code>CC50_median</code> (F1=0.785).</li>
+<li><code>Voting</code> лучшая для <code>SI_median</code> (F1=0.642).</li>
+<li><code>RF</code> лучшая для <code>SI &gt; 8</code> (F1=0.847).</li>
+<li>Высокий F1 (0.847) для <code>SI &gt; 8</code> указывает на хорошую способность модели выявлять эффективные соединения.</li>
+</ul></li>
+<li><strong>Важность признаков</strong>:
+<ul>
+<li>Графики (<code>feature_importance_*.png</code>) выявляют ключевые характеристики, влияющие на IC50, CC50 и SI.</li>
+</ul></li>
+</ul>
+
+<h3>QSAR-анализ</h3>
+
+<ol>
+<li><strong>Неэффективные соединения</strong>: Высокий IC50, SI &lt; 8. Используйте <code>IC50_median</code> и <code>SI &gt; 8</code> для их идентификации.</li>
+<li><strong>Эффективные соединения</strong>: Низкий IC50, высокий SI &gt; 8. Модель для <code>SI &gt; 8</code> (F1=0.849) наиболее точна для их выявления.</li>
+<li><strong>Опасные соединения</strong>: Низкий CC50. Модель для <code>CC50_median</code> (F1=0.785) помогает их идентифицировать.</li>
+</ol>
+
+<h3>Рекомендации</h3>
+
+<ul>
+<li>Использовать SMOTE для улучшения классификации <code>SI &gt; 8</code>, особенно для повышения Recall.</li>
+<li>Применить Stacking Regressor для повышения R² в регрессии <code>log_si</code>.</li>
+<li>Добавить SHAP-анализ для интерпретации важности признаков.</li>
+<li>Провести внешнюю валидацию моделей на новых данных.</li>
+<li>Рассмотреть добавление 3D-дескрипторов для улучшения предсказательной способности.</li>
+</ul>
+
+<h2>Заключение</h2>
+
+<p>Проект успешно проанализировал 1000 соединений, выявив ключевые признаки, влияющие на активность против вируса гриппа. Модели классификации для <code>SI &gt; 8</code> (F1=0.849) и <code>CC50_median</code> (F1=0.785) показали высокую точность. Регрессия для <code>log_cc50</code> (R²=0.501) и <code>log_ic50</code> (R²=0.475) демонстрирует умеренную предсказательную способность, но для <code>log_si</code> (R²=0.226) требуется оптимизация. Визуализации и результаты полезны для оптимизации соединений. Рекомендуется внешняя валидация и добавление 3D-дескрипторов.</p>

@@ -1,0 +1,38 @@
+2025-06-09 11:12:52,402 - INFO - Loading data
+2025-06-09 11:12:52,425 - INFO - Data split: train=800, test=201
+2025-06-09 11:12:52,430 - INFO - Features standardized
+2025-06-09 11:12:52,431 - INFO - Training RF
+2025-06-09 11:15:03,644 - INFO - Best params for RF: {'n_estimators': 128, 'max_depth': 20, 'min_samples_split': 3, 'min_samples_leaf': 1}
+2025-06-09 11:15:04,675 - INFO - Train R2 for RF: 0.929
+2025-06-09 11:15:04,675 - INFO - Test Metrics RF: MSE=1.154, R2=0.476, MAE=0.762
+2025-06-09 11:15:05,022 - INFO - Feature importance saved: figures/feature_importance_log_cc50_rf.png
+2025-06-09 11:15:05,023 - INFO - Training XGB
+2025-06-09 11:16:41,554 - INFO - Best params for XGB: {'n_estimators': 87, 'max_depth': 7, 'learning_rate': 0.14497240887543064, 'reg_lambda': 40.29539385739762, 'reg_alpha': 0.576359120662388}
+2025-06-09 11:16:42,094 - INFO - Train R2 for XGB: 0.915
+2025-06-09 11:16:42,094 - INFO - Test Metrics XGB: MSE=1.201, R2=0.455, MAE=0.764
+2025-06-09 11:16:42,379 - INFO - Feature importance saved: figures/feature_importance_log_cc50_xgb.png
+2025-06-09 11:16:42,379 - INFO - Training LGB
+2025-06-09 11:17:04,151 - INFO - Best params for LGB: {'n_estimators': 88, 'max_depth': 20, 'learning_rate': 0.26601093474767873, 'num_leaves': 43, 'min_child_samples': 30}
+2025-06-09 11:17:04,267 - INFO - Train R2 for LGB: 0.947
+2025-06-09 11:17:04,267 - INFO - Test Metrics LGB: MSE=1.240, R2=0.437, MAE=0.790
+2025-06-09 11:17:04,474 - INFO - Feature importance saved: figures/feature_importance_log_cc50_lgb.png
+2025-06-09 11:17:04,474 - INFO - Training GB
+2025-06-09 11:19:13,722 - INFO - Best params for GB: {'n_estimators': 198, 'max_depth': 4, 'learning_rate': 0.043434718387899876, 'min_samples_split': 6}
+2025-06-09 11:19:16,497 - INFO - Train R2 for GB: 0.842
+2025-06-09 11:19:16,497 - INFO - Test Metrics GB: MSE=1.142, R2=0.482, MAE=0.783
+2025-06-09 11:19:16,698 - INFO - Feature importance saved: figures/feature_importance_log_cc50_gb.png
+2025-06-09 11:19:16,700 - INFO - Training LR
+2025-06-09 11:19:20,797 - INFO - Best params for LR: {'fit_intercept': True}
+2025-06-09 11:19:20,827 - INFO - Train R2 for LR: 0.498
+2025-06-09 11:19:20,827 - INFO - Test Metrics LR: MSE=1.493, R2=0.322, MAE=0.944
+2025-06-09 11:19:20,827 - INFO - Training voting regressor
+2025-06-09 11:19:25,037 - INFO - Voting metrics: MSE=1.099, R2=0.501, MAE=0.749
+2025-06-09 11:19:25,214 - INFO - Prediction plot saved: figures/pred_vs_true_log_cc50_gb.png
+2025-06-09 11:19:25,219 - INFO - Regression results log_cc50:
+    Model    MSE     R2    MAE
+0      RF  1.154  0.476  0.762
+1     XGB  1.201  0.455  0.764
+2     LGB  1.240  0.437  0.790
+3      GB  1.142  0.482  0.783
+4      LR  1.493  0.322  0.944
+5  Voting  1.099  0.501  0.749

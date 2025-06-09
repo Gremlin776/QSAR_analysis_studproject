@@ -1,0 +1,11 @@
+# Устанавливаем LF для текстовых файлов (Python, Markdown, txt)
+*.py text eol=lf
+*.md text eol=lf
+*.markdown text eol=lf
+*.txt text eol=lf
+
+# Для бинарных файлов (например, Excel, изображения) отключаем обработку
+*.xlsx binary
+*.png binary
+*.jpg binary
+*.pdf binary
